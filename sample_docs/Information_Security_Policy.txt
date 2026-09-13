@@ -1,0 +1,50 @@
+NOVATECH INFORMATION SECURITY POLICY AND DATA PROTECTION STANDARDS (V5.1)
+=========================================================================
+
+## 1. Policy Classification and Access Authorization
+
+CLASSIFICATION: RESTRICTED.
+
+ACCESS CONTROL LIST (ACL): Restricted exclusively to authorized security personnel and system administrators: security-team@example.com, admin@example.com.
+
+This document outlines mandatory information security controls, encryption mandates, credential rotation protocols, and incident response SLAs across NovaTech infrastructure.
+
+## 2. Authentication, MFA Mandate & Password Standards
+
+Multi-Factor Authentication (MFA): Strong MFA is mandatory for all employee and contractor accounts accessing NovaTech systems. Approved authentication methods include FIDO2/WebAuthn hardware security keys (YubiKey) or time-based one-time password (TOTP) applications (1Password, Google Authenticator). SMS-based 2FA is explicitly prohibited across all systems.
+
+Password Complexity: User account passwords must be at least 16 characters in length and include uppercase letters, lowercase letters, numbers, and symbols. Passwords must be generated and stored in corporate 1Password vaults.
+
+SSH Keys & API Token Rotation: Production SSH keys, database credentials, and cloud API tokens must be rotated every 90 days. Unused service account credentials older than 30 days are automatically disabled.
+
+## 3. Data Classification and Encryption Standards
+
+NovaTech data is categorized into four strict classification tiers:
+
+Public: Marketing brochures, open-source repositories, and public documentation.
+
+Internal: General employee policies, standard onboarding guides, and company-wide announcements.
+
+Confidential: Product strategy roadmaps, financial models, vendor contracts, and unreleased feature specifications.
+
+Restricted: Production database records, customer PII, encryption keys, security audit logs, and employee compensation data.
+
+Encryption Mandates: All data at rest must be encrypted using AES-256 encryption across storage disks, AWS S3 buckets, and ChromaDB vector collections. All data in transit must strictly enforce TLS 1.3 encryption.
+
+## 4. Security Incident Response Protocol and SLAs
+
+Security incidents are categorized into three severity tiers, each with strict response SLAs:
+
+Severity 0 (Critical — Active data breach, root credential compromise, or active exfiltration): Maximum 15-minute response SLA. An Incident Commander must be designated within 30 minutes; executive leadership and legal counsel must be briefed within 2 hours.
+
+Severity 1 (High — Critical zero-day vulnerability in production or single-point failure affecting authentication): Maximum 1-hour response SLA. Mitigation plan required within 4 hours.
+
+Severity 2 (Medium — Policy non-compliance or minor security alerts without data exposure): Maximum 8-hour response SLA.
+
+## 5. Clean Desk, Screen Lock and Device Security Policy
+
+Screen Lock: All workstations must automatically lock screens after 5 minutes of inactivity.
+
+Full-Disk Encryption: FileVault (macOS) or BitLocker (Windows) full-disk encryption is mandatory and enforced via Kandji MDM.
+
+Removable Media: Employees are strictly prohibited from copying corporate data to personal USB flash drives or unapproved third-party cloud storage.

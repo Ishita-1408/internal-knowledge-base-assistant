@@ -1,0 +1,27 @@
+Epic,Story,Priority,Status,Notes
+Epic 1: Document Ingestion,Upload / point to local folder,P0,Done,connectors/local_folder.py
+Epic 1: Document Ingestion,Parse PDF/DOCX/TXT,P0,Done,ingestion/extract.py
+Epic 1: Document Ingestion,Chunk documents with overlap,P0,Done,ingestion/chunk.py
+Epic 1: Document Ingestion,Connect Google Drive (OAuth),P0,Done,connectors/google_drive.py
+Epic 1: Document Ingestion,Store per-doc ACL metadata,P0,Done,connectors/google_drive.py get_permissions
+Epic 1: Document Ingestion,Notion connector,P1,Backlog,Interface stubbed only - connectors/notion.py
+Epic 2: Retrieval,Generate embeddings,P0,Done,retrieval/embed.py
+Epic 2: Retrieval,Vector search (top-K),P0,Done,retrieval/vector_store.py
+Epic 2: Retrieval,Permission-aware filtering,P0,Done,retrieval/permission_filter.py - see ADR 001
+Epic 2: Retrieval,Reranking of retrieved chunks,P2,Backlog,Not built - v1 uses distance threshold only
+Epic 2: Retrieval,Incremental sync via Changes API,P0,Done,connectors/google_drive.py get_changes_since
+Epic 3: Answer Generation,Prompt design (system + citation instructions),P0,Done,generation/prompt.py
+Epic 3: Answer Generation,Context injection,P0,Done,generation/prompt.py build_prompt
+Epic 3: Answer Generation,Citation generation (inline [1] [2]),P0,Done,generation/answer.py
+Epic 3: Answer Generation,Refusal when evidence is insufficient,P0,Done,generation/answer.py NO_ANSWER_FALLBACK
+Epic 3: Answer Generation,Response latency tracking,P0,Done,generation/answer.py latency_seconds
+Epic 4: Evaluation,Create evaluation dataset (golden set),P0,In Progress,evaluation/golden_set.json - 3 of target 20-30 written
+Epic 4: Evaluation,Retrieval evaluation (Recall@K/Precision@K/MRR),P0,Done,evaluation/retrieval_metrics.py
+Epic 4: Evaluation,Answer evaluation (groundedness/correctness/citation accuracy/hallucination),P0,Done,evaluation/scorer.py
+Epic 4: Evaluation,Product metrics (resolution rate/escalation/latency/satisfaction),P0,Done,evaluation/product_metrics.py
+Epic 4: Evaluation,Latency testing at scale,P2,Backlog,Only measured per-query so far - no load test yet
+Epic 5: UI & Feedback,Home / query screen,P0,Done,app/streamlit_app.py
+Epic 5: UI & Feedback,Sources panel with citations,P0,Done,app/streamlit_app.py expander per citation
+Epic 5: UI & Feedback,Thumbs up/down feedback capture,P0,Done,storage/db.py log_feedback
+Epic 5: UI & Feedback,Admin / sync status view,P1,Backlog,Dashboard shows feedback + eval report, not per-doc sync status yet
+Epic 5: UI & Feedback,Metrics dashboard,P0,Done,dashboard/metrics_dashboard.py

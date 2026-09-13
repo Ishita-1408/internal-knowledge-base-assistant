@@ -1,0 +1,12 @@
+pymupdf
+python-docx
+tiktoken
+langchain-text-splitters
+chromadb
+openai
+streamlit
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+python-dotenv
+pytest

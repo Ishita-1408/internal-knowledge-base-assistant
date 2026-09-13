@@ -1,0 +1,202 @@
+[
+  {
+    "id": "q01",
+    "question": "What is the maximum amount for the one-time Home Office Equipment Stipend, and within how many days must it be claimed?",
+    "relevant_source_titles": ["Remote_Work_Policy.pdf"],
+    "expected_answer": "Employees are eligible for a one-time Home Office Equipment Stipend of up to $1,000 USD, and receipts must be submitted in Expensify within the first 60 calendar days of employment.",
+    "type": "direct_lookup",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q02",
+    "question": "How many weeks of fully paid parental leave does NovaTech provide, and what is the minimum service requirement?",
+    "relevant_source_titles": ["Leave_and_Attendance_Policy.docx"],
+    "expected_answer": "NovaTech provides 16 consecutive weeks of 100% fully paid parental leave for primary and secondary caregivers who have completed at least 6 months of continuous service.",
+    "type": "direct_lookup",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q03",
+    "question": "What is the maximum nightly hotel lodging cap for Tier 1 metropolitan markets?",
+    "relevant_source_titles": ["Travel_and_Expense_Policy.docx"],
+    "expected_answer": "The maximum nightly lodging rate for Tier 1 metropolitan markets (such as New York City, San Francisco, London, Tokyo, Zurich, Singapore, and Paris) is $300 USD per night excluding taxes.",
+    "type": "direct_lookup",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q04",
+    "question": "What are NovaTech's daily Core Collaboration Window hours and timezone?",
+    "relevant_source_titles": ["Remote_Work_Policy.pdf"],
+    "expected_answer": "The daily Core Collaboration Window is from 10:00 AM to 3:00 PM Eastern Standard Time (EST), Monday through Friday.",
+    "type": "direct_lookup",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q05",
+    "question": "Within how many days must employee expense reports be submitted in Expensify, and when are late submissions automatically rejected?",
+    "relevant_source_titles": ["Travel_and_Expense_Policy.docx"],
+    "expected_answer": "Expense reports must be submitted in Expensify within 30 calendar days of incurring the expense, and late submissions older than 60 calendar days are automatically rejected.",
+    "type": "direct_lookup",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q06",
+    "question": "What is the advance notice requirement and Workday submission rule for planned PTO exceeding 3 consecutive business days?",
+    "relevant_source_titles": ["Leave_and_Attendance_Policy.docx"],
+    "expected_answer": "Planned time-off requests exceeding 3 consecutive business days must be formally submitted in Workday at least 10 business days in advance.",
+    "type": "direct_lookup",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q07",
+    "question": "What time does the Day 1 virtual Welcome & Orientation session start for new hires?",
+    "relevant_source_titles": ["Employee_Onboarding_Guide.pdf"],
+    "expected_answer": "The Day 1 virtual Welcome & Orientation session starts at 9:30 AM EST on Zoom, hosted by the People Operations team.",
+    "type": "direct_lookup",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q08",
+    "question": "What is the scheduled hardware refresh cycle for primary company workstations?",
+    "relevant_source_titles": ["Remote_Work_Policy.pdf"],
+    "expected_answer": "Primary company workstations are eligible for an automated hardware refresh every 36 months of active service.",
+    "type": "direct_lookup",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q09",
+    "question": "What was the planned target launch for the Mobile Knowledge Assistant in Q1, and why was it postponed in the Q2 roadmap?",
+    "relevant_source_titles": ["Q1_Product_Roadmap.docx", "Q2_Product_Roadmap.pdf"],
+    "expected_answer": "In the Q1 roadmap, the Mobile Knowledge Assistant MVP had a target launch date of March 31, 2026. In the Q2 roadmap, it was officially deprioritized and postponed to Q4 2026 to refocus engineering resources on RAG retrieval accuracy, evaluation benchmarks, and cost visibility.",
+    "type": "multi_document_synthesis",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q10",
+    "question": "How did engineering staffing change between Q1 and Q2 for the Web UI and Evaluation teams?",
+    "relevant_source_titles": ["Q1_Product_Roadmap.docx", "Q2_Product_Roadmap.pdf"],
+    "expected_answer": "In Q1, 4 frontend engineers and 1 product designer worked on the Web UI, with 3 mobile engineers on the mobile app. In Q2, resources were reallocated to establish a dedicated 5-engineer Evaluation & Quality team, 7 engineers on Core RAG/Ingestion, and 3 engineers on the Web UI and metrics dashboard.",
+    "type": "multi_document_synthesis",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q11",
+    "question": "According to the onboarding guide and remote work policy, what is the amount of the home office stipend and what items are eligible versus ineligible?",
+    "relevant_source_titles": ["Employee_Onboarding_Guide.pdf", "Remote_Work_Policy.pdf"],
+    "expected_answer": "The home office equipment stipend is up to $1,000 USD submitted via Expensify in Week 1 (within 60 days). Eligible items include motorized standing desks, ergonomic task chairs, external 4K monitors, keyboards, mice, webcams, and headsets. Ineligible items include standing desk converters, decorative furniture, audio speakers, and gaming peripherals.",
+    "type": "multi_document_synthesis",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q12",
+    "question": "What review must a new hire complete at 90 days, and what international remote work privilege does passing this review unlock?",
+    "relevant_source_titles": ["Employee_Onboarding_Guide.pdf", "Remote_Work_Policy.pdf"],
+    "expected_answer": "At 90 days, new hires complete their formal 90-Day Probationary Review with their manager and HRBP. Successfully passing this review unlocks the privilege to work remotely from an international location for up to 30 consecutive business days per calendar year.",
+    "type": "multi_document_synthesis",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q13",
+    "question": "How does the recurring remote technology allowance differ from the daily travel meal allowance in terms of reimbursement amount and method?",
+    "relevant_source_titles": ["Remote_Work_Policy.pdf", "Travel_and_Expense_Policy.docx"],
+    "expected_answer": "The technology & internet allowance is $600 USD per year ($50 USD monthly) reimbursed automatically through monthly payroll. The business travel meal allowance is up to $85 USD per day ($20 breakfast, $25 lunch, $40 dinner) submitted via Expensify with itemized receipts required for meals over $25.",
+    "type": "multi_document_synthesis",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q14",
+    "question": "What tool and deadline are used for new hire health benefits enrollment, and what tool is used for submitting PTO requests?",
+    "relevant_source_titles": ["Employee_Onboarding_Guide.pdf", "Leave_and_Attendance_Policy.docx"],
+    "expected_answer": "Health, dental, and vision benefits enrollment is completed in BambooHR within a 30-calendar-day enrollment window from the hire date. Planned PTO requests exceeding 3 days are submitted via Workday at least 10 business days in advance.",
+    "type": "multi_document_synthesis",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q15",
+    "question": "What is the response SLA and escalation protocol for a Severity 0 critical security incident?",
+    "relevant_source_titles": ["Information_Security_Policy.txt"],
+    "expected_answer": "For Severity 0 Critical incidents (active data breach or root credential compromise), the response SLA is a maximum of 15 minutes. An Incident Commander must be designated within 30 minutes, and executive leadership and legal counsel must be briefed within 2 hours.",
+    "type": "permission_boundary",
+    "user_email": "security-team@example.com"
+  },
+  {
+    "id": "q16",
+    "question": "What is the response SLA and escalation protocol for a Severity 0 critical security incident?",
+    "relevant_source_titles": [],
+    "expected_answer": "I don't have enough confidently-sourced information to answer that. Try rephrasing, or this may not be covered in the documents I have access to.",
+    "type": "permission_boundary",
+    "user_email": "unauthorized-user@example.com"
+  },
+  {
+    "id": "q17",
+    "question": "What are the target calibration percentages and bonus multipliers for Rating 4 and Rating 5 in the performance review guidelines?",
+    "relevant_source_titles": ["Performance_Review_Guidelines.docx"],
+    "expected_answer": "Rating 4 (Exceeds Expectations) has a target distribution of approximately 20% and is eligible for a 1.25x target bonus multiplier. Rating 5 (Outstanding Impact) has a target distribution of approximately 5% and is eligible for a 1.5x target bonus multiplier and priority promotion consideration.",
+    "type": "permission_boundary",
+    "user_email": "manager@example.com"
+  },
+  {
+    "id": "q18",
+    "question": "What are the target calibration percentages and bonus multipliers for Rating 4 and Rating 5 in the performance review guidelines?",
+    "relevant_source_titles": [],
+    "expected_answer": "I don't have enough confidently-sourced information to answer that. Try rephrasing, or this may not be covered in the documents I have access to.",
+    "type": "permission_boundary",
+    "user_email": "general-employee@example.com"
+  },
+  {
+    "id": "q19",
+    "question": "How often must production SSH keys and API service account tokens be rotated according to the security policy?",
+    "relevant_source_titles": ["Information_Security_Policy.txt"],
+    "expected_answer": "Production SSH keys, database credentials, and cloud API tokens must be rotated every 90 days. Unused service account credentials older than 30 days are automatically disabled.",
+    "type": "permission_boundary",
+    "user_email": "admin@example.com"
+  },
+  {
+    "id": "q20",
+    "question": "What is the CEO's personal mobile phone number and home address?",
+    "relevant_source_titles": [],
+    "expected_answer": "I don't have enough confidently-sourced information to answer that. Try rephrasing, or this may not be covered in the documents I have access to.",
+    "type": "out_of_scope",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q21",
+    "question": "What was NovaTech's total annual recurring revenue (ARR) and net profit margin for fiscal year 2025?",
+    "relevant_source_titles": [],
+    "expected_answer": "I don't have enough confidently-sourced information to answer that. Try rephrasing, or this may not be covered in the documents I have access to.",
+    "type": "out_of_scope",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q22",
+    "question": "What is the exact street address and suite number for the Austin regional office?",
+    "relevant_source_titles": [],
+    "expected_answer": "I don't have enough confidently-sourced information to answer that. Try rephrasing, or this may not be covered in the documents I have access to.",
+    "type": "out_of_scope",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q23",
+    "question": "What is the weekly catering lunch menu and cafeteria schedule for the San Francisco hub?",
+    "relevant_source_titles": [],
+    "expected_answer": "I don't have enough confidently-sourced information to answer that. Try rephrasing, or this may not be covered in the documents I have access to.",
+    "type": "out_of_scope",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q24",
+    "question": "How many unused PTO days can be rolled over into the next calendar year, and on what exact date do rolled-over days expire?",
+    "relevant_source_titles": ["Leave_and_Attendance_Policy.docx"],
+    "expected_answer": "Employees may roll over a maximum of 5 unused PTO days (40 hours) into the next calendar year, and all rolled-over PTO expires on March 31 of the new calendar year without cash payout.",
+    "type": "temporal_detail",
+    "user_email": "eval-runner@example.com"
+  },
+  {
+    "id": "q25",
+    "question": "Under what exact flight duration threshold and executive approval level is an employee permitted to book Premium Economy or Business Class airfare?",
+    "relevant_source_titles": ["Travel_and_Expense_Policy.docx"],
+    "expected_answer": "Premium Economy or Business Class airfare is permitted exclusively for international flights exceeding 8 continuous flight hours, and it requires written pre-authorization from the employee's functional Vice President.",
+    "type": "temporal_detail",
+    "user_email": "eval-runner@example.com"
+  }
+]
