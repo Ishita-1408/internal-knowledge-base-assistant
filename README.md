@@ -2,6 +2,8 @@
 
 An enterprise knowledge-base assistant that answers natural-language questions with citation-grounded responses sourced from indexed documents — enforcing source-level access controls **before** retrieved context reaches the LLM.
 
+Live Demo: https://ishita-1408-internal-knowledge-base-ass-appstreamlit-app-ohoxsx.streamlit.app/
+
 ---
 
 ## Architecture Overview
@@ -38,7 +40,7 @@ An enterprise knowledge-base assistant that answers natural-language questions w
 
 ---
 
-## Key Decisions & Architecture Records
+## Key Architecture Decision Records(ADRs):
 
 - [ADR 001: Permission-aware retrieval, not prompt-based restriction](docs/decisions/001-permission-aware-retrieval.md)
 - [ADR 002: Google Drive + local files only](docs/decisions/002-drive-first-connector-scope.md)
