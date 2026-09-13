@@ -187,5 +187,3 @@ tests/          Complete 59-test automated test suite
 ## Author
 
 **Ishita**  
-Product Management / AI Product Portfolio  
-GitHub: [Ishita-1408](https://github.com/Ishita-1408)
