@@ -40,7 +40,24 @@ Live Demo: https://ishita-1408-internal-knowledge-base-ass-appstreamlit-app-ohox
 
 ---
 
-## Key Architecture Decision Records(ADRs):
+## Tech Stack
+
+- **Frontend:** Streamlit
+- **Backend:** Python
+- **LLM:** Configurable OpenAI-compatible LLM provider
+- **Embeddings:** 3072-dimensional embeddings
+- **Vector Store:** ChromaDB
+- **Database:** SQLite
+- **Document Processing:** PyMuPDF, python-docx
+- **Retrieval:** Cosine-similarity semantic search
+- **Connectors:** Google Drive, Local Folder
+- **Evaluation:** Custom retrieval, answer-quality, and product metrics
+- **Testing:** Pytest
+- **Authentication:** Google OAuth 2.0
+
+---
+
+## Key Decisions & Architecture Records (ADRs)
 
 - [ADR 001: Permission-aware retrieval, not prompt-based restriction](docs/decisions/001-permission-aware-retrieval.md)
 - [ADR 002: Google Drive + local files only](docs/decisions/002-drive-first-connector-scope.md)
@@ -67,11 +84,11 @@ Full product requirements and specifications: [docs/PRD.md](docs/PRD.md).
 
 Evaluation is structured across three distinct layers:
 
-| Layer | Metrics | Location |
-|---|---|---|
-| **Retrieval Quality** | Recall@3 (97.4% in-scope), Precision@3 (84.2%), MRR (1.00 in-scope) | `evaluation/retrieval_metrics.py` |
-| **Answer Quality** | Groundedness, Answer Correctness, Citation Accuracy, Hallucination Rate | `evaluation/scorer.py` |
-| **Product & Security** | Permission Leak Rate (0.0%), Query Resolution, Latency, User Feedback | `evaluation/product_metrics.py`, `storage/db.py` |
+| Layer | Metrics | Measured Benchmark Results | Location |
+|---|---|---|---|
+| **Retrieval Quality** | Recall@3, Precision@3, MRR | Recall@3: 97.4% (in-scope)<br>Precision@3: 84.2%<br>MRR: 1.00 (in-scope) | `evaluation/retrieval_metrics.py` |
+| **Answer Quality** | Groundedness, Answer Correctness, Citation Accuracy, Hallucination Rate | Evaluated via LLM-as-judge (quota-dependent) | `evaluation/scorer.py` |
+| **Product & Security** | Permission Leak Rate, Query Resolution, Latency, User Feedback | Permission Leak Rate: 0% | `evaluation/product_metrics.py`, `storage/db.py` |
 
 To run the automated evaluation suite against the 25-case golden set:
 ```bash
@@ -155,3 +172,20 @@ storage/        SQLite database for feedback telemetry and sync state
 tests/          Complete 59-test automated test suite
 ```
 
+---
+
+## Future Enhancements
+
+- Additional enterprise connectors such as Notion and Confluence
+- Improved retrieval using reranking and hybrid search
+- More granular administration and document-level sync visibility
+- Expanded scalability and latency testing
+- Enterprise authentication and centralized identity management
+
+---
+
+## Author
+
+**Ishita**  
+Product Management / AI Product Portfolio  
+GitHub: [Ishita-1408](https://github.com/Ishita-1408)
