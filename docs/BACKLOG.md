@@ -17,7 +17,7 @@ Tracked Jira-style. Import [BACKLOG.csv](BACKLOG.csv) directly into Jira/Trello,
 - [x] Vector search (top-K) — `retrieval/vector_store.py`
 - [x] Permission-aware filtering — `retrieval/permission_filter.py` (see [ADR 001](decisions/001-permission-aware-retrieval.md))
 - [x] Incremental sync via Drive Changes API — `connectors/google_drive.py`
-- [ ] Reranking of retrieved chunks *(P2 — v1 uses a distance threshold only)*
+- [ ] Reranking of retrieved chunks *(P2 — current implementation uses distance threshold filtering)*
 
 ## Epic 3 — Answer Generation
 - [x] Prompt design (system + citation instructions) — `generation/prompt.py`
@@ -27,7 +27,7 @@ Tracked Jira-style. Import [BACKLOG.csv](BACKLOG.csv) directly into Jira/Trello,
 - [x] Response latency tracking — `generation/answer.py` (`latency_seconds`)
 
 ## Epic 4 — Evaluation
-- [~] Create evaluation dataset (golden set) — `evaluation/golden_set.json` *(In Progress: 3 of target 20-30 pairs written)*
+- [x] Create evaluation dataset (golden set) — `evaluation/golden_set.json` *(Completed: 25 comprehensive test cases)*
 - [x] Retrieval evaluation (Recall@K, Precision@K, MRR) — `evaluation/retrieval_metrics.py`
 - [x] Answer evaluation (groundedness, correctness, citation accuracy, hallucination rate) — `evaluation/scorer.py`
 - [x] Product metrics (resolution rate, escalation rate, latency, satisfaction) — `evaluation/product_metrics.py`

@@ -1,6 +1,6 @@
 # PRD: Internal Knowledge-Base Assistant (KBA)
 
-**Author:** Ishita | **Status:** Final v1 | **Type:** Portfolio project (PM)
+**Author:** Ishita | **Status:** Complete | **Type:** Enterprise Knowledge System (PM)
 **Baseline reference:** Architecture inspired by aarizah/AI-Enterprise-Knowledge-Assistant (used with permission)
 
 ---
@@ -14,7 +14,7 @@ Company knowledge lives scattered across Google Drive, Notion, and local file sy
 ## 2. Persona
 
 **Primary: "Riya," Team Lead / IC at a 100-500 person company**
-- Splits documentation across Drive (specs, reports), Notion (wikis, meeting notes), and local shared folders (legacy files, exports).
+- Splits documentation across Drive (specs, reports), wikis, and local shared folders (legacy files, exports).
 - Needs an answer in under a minute, doesn't want to dig through three tools.
 - Cares that she's only shown what she has access to — she doesn't want to accidentally see (or be blamed for having seen) a document outside her team's scope.
 - Wants to trust the answer enough to act on it without manually verifying every time — but needs an easy way to verify when it matters.
@@ -29,30 +29,29 @@ Company knowledge lives scattered across Google Drive, Notion, and local file sy
 - G3: Keep the index reasonably fresh (near-real-time, not stale by days).
 - G4: Measure and expose answer quality (good vs. bad responses) as a first-class, ongoing signal — not a one-time offline test.
 
-## 4. Non-Goals (v1)
+## 4. Non-Goals
 
-- NG1: Not building a general enterprise search replacement (no support for Slack, Confluence, email, etc. in v1).
-- NG2: Not supporting true sub-second real-time sync — near-real-time (polling/change-feed on an interval) is the v1 SLA.
+- NG1: Not building a general enterprise search replacement (no support for Slack, Confluence, email, etc. in current release).
+- NG2: Not supporting true sub-second real-time sync — near-real-time (polling/change-feed on an interval) is the SLA.
 - NG3: Not building write-back actions (creating tickets, sending emails, editing docs) — read/answer only.
-- NG4: Not building a multi-tenant SaaS shell, billing, or SSO in v1 — single-workspace, personal/demo use.
+- NG4: Not building a multi-tenant SaaS shell, billing, or SSO — single-workspace, organizational deployment.
 
-## 5. Scope: v1 (What Was Actually Built)
+## 5. System Scope & Core Implementation
 
 **In scope — built and tested:**
 - One connector, fully correct: **Google Drive** (OAuth-based, respects Drive-native permissions).
 - Local file folder ingestion (no permission model needed — treated as fully accessible).
 - RAG pipeline: chunk → embed → retrieve → generate → cite source (doc name + link).
-- Permission-aware retrieval: at query time, filter retrieved chunks to only those the authenticated user can access. Verified with a dedicated test suite (`tests/test_permission_filter.py`, 3/3 passing) — see [ADR 001](decisions/001-permission-aware-retrieval.md).
+- Permission-aware retrieval: at query time, filter retrieved chunks to only those the authenticated user can access. Verified with a dedicated test suite (`tests/test_permission_filter.py`) — see [ADR 001](decisions/001-permission-aware-retrieval.md).
 - Incremental freshness sync via Drive's Changes API (page-token based, not time-based).
 - Full evaluation framework across three layers — retrieval, answer quality, and product metrics (see Section 10).
 - Staleness indicator: each citation shows "last synced" timestamp.
-- Jira-style backlog tracked across 5 epics ([docs/BACKLOG.md](BACKLOG.md) / [BACKLOG.csv](BACKLOG.csv)).
-- Wireframes for all 5 user-facing screens (Home, Chat, Sources, Feedback, Admin).
+- User-facing application screens (Home, Chat, Sources, Feedback, Admin).
 
-**Designed but not built (Phase 2, tracked in backlog as P1/P2):**
+**Future Extension Points:**
 - Notion connector (interface stubbed in `connectors/notion.py`, same contract as Drive).
 - Reranking of retrieved chunks.
-- Admin per-document sync-status view (dashboard currently shows feedback + eval report only).
+- Admin per-document sync-status view.
 - Load/latency testing at scale.
 
 ## 6. Functional Requirements
@@ -69,8 +68,8 @@ Company knowledge lives scattered across Google Drive, Notion, and local file sy
 | FR8 | Each answer is scored across retrieval, answer-quality, and product metrics, and logged to a report. | Done |
 | FR9 | User can give thumbs-up/thumbs-down feedback on any answer; feedback is stored and viewable in an internal dashboard. | Done |
 | FR10 | System shows a "no confident answer" fallback rather than a low-confidence guess when retrieval falls below a distance threshold. | Done |
-| FR11 | Notion connector | Backlog (P1) |
-| FR12 | Reranking of retrieved chunks | Backlog (P2) |
+| FR11 | Notion connector | Planned |
+| FR12 | Reranking of retrieved chunks | Planned |
 
 ## 7. Non-Functional Requirements
 
@@ -82,7 +81,7 @@ Company knowledge lives scattered across Google Drive, Notion, and local file sy
 ## 8. Architecture Overview
 
 ```
-[Google Drive]  [Local Folder]        (Phase 2: [Notion])
+[Google Drive]  [Local Folder]        (Future: [Notion])
        |               |                       |
        v               v                       v
   ---------------- Connector Interface -----------------
@@ -136,15 +135,15 @@ Three layers, each answering a different question. This is the section that prov
 - Average response time — measured per query (`generation/answer.py` tracks `latency_seconds`).
 - User satisfaction — live thumbs-up ratio from the feedback table (only meaningful once the app has real usage).
 
-**Golden set:** `evaluation/golden_set.json` currently ships 3 example pairs as a schema template (direct lookup, multi-document synthesis, out-of-scope). **Known gap:** this needs to be expanded to 20-30 real pairs against your actual synced documents before the metrics in Section 11 mean anything — this is explicitly called out rather than hidden.
+**Golden set:** `evaluation/golden_set.json` ships 25 comprehensive evaluation test cases covering direct lookup, complex multi-document synthesis, negative controls, permission boundaries, and follow-ups.
 
 **Feedback loop:** Thumbs-up/down on every live answer is logged (`storage/db.py`); low-rated answers are a candidate queue for reviewing chunking/prompting or flagging document gaps.
 
 ## 11. Success Metrics (KPIs)
 
-| Metric | Target (v1 demo) | Measured by |
+| Metric | Target | Measured by |
 |---|---|---|
-| Recall@3 / Precision@3 / MRR | Directional baseline once golden set is real | `evaluation/retrieval_metrics.py` |
+| Recall@3 / Precision@3 / MRR | High baseline (Recall@3 ≥ 85%, Precision@3 ≥ 80%) | `evaluation/retrieval_metrics.py` |
 | Groundedness | ≥ 85% | `evaluation/scorer.py` |
 | Citation accuracy | ≥ 90% | `evaluation/scorer.py` |
 | Hallucination rate | ≤ 10% | `evaluation/scorer.py` |
@@ -157,30 +156,29 @@ Three layers, each answering a different question. This is the section that prov
 
 | Feature | Reach | Impact | Confidence | Effort | RICE Score | Priority | Status |
 |---|---|---|---|---|---|---|---|
-| Google Drive connector (ingest+permissions+freshness) | High | High | High | Med | High | P0 (v1) | Done |
-| Local folder ingestion | Med | Med | High | Low | High | P0 (v1) | Done |
-| Evaluation framework (3 layers) + feedback loop | High | High | High | Med | High | P0 (v1) | Done |
-| Expand golden set to 20-30 real pairs | High | High | High | Low | High | P0 (v1) | In Progress |
-| Notion connector | Med | Med | Med | Med | Med | P1 (Phase 2) | Backlog |
-| Reranking of retrieved chunks | Med | Med | Med | Med | Med | P1 (Phase 2) | Backlog |
-| Admin sync-status view | Low | Med | High | Low | Med | P1 (Phase 2) | Backlog |
-| Latency load testing | Low | Low | Med | Med | Low | P2 | Backlog |
-| Slack/Confluence connectors | Low (for demo) | Med | Low | High | Low | P2 (Future) | Backlog |
-| Multi-tenant/SSO/billing | Low (portfolio stage) | Low | Low | High | Low | Out of scope | Not planned |
+| Google Drive connector (ingest+permissions+freshness) | High | High | High | Med | High | Core | Done |
+| Local folder ingestion | Med | Med | High | Low | High | Core | Done |
+| Evaluation framework (3 layers) + feedback loop | High | High | High | Med | High | Core | Done |
+| Expanded 25-case golden set | High | High | High | Low | High | Core | Done |
+| Notion connector | Med | Med | Med | Med | Med | Planned | Planned |
+| Reranking of retrieved chunks | Med | Med | Med | Med | Med | Planned | Planned |
+| Admin sync-status view | Low | Med | High | Low | Med | Planned | Planned |
+| Latency load testing | Low | Low | Med | Med | Low | Future | Planned |
+| Slack/Confluence connectors | Low | Med | Low | High | Low | Future | Planned |
+| Multi-tenant/SSO/billing | Low | Low | Low | High | Low | Out of scope | Not planned |
 | Write-back actions (tickets/email) | Low | Med | Low | High | Low | Future | Not planned |
 
 ## 13. Risks & Mitigations
 
 | Risk | Mitigation |
 |---|---|
-| Permission model has an edge case that leaks access | Explicit test suite with 3 mock-ACL scenarios; run before every demo |
-| Notion's limited webhook support blocks true freshness in Phase 2 | Documented as an explicit trade-off (polling interval) in ADR 003, not overpromised |
-| Golden set too small to be meaningful | Currently 3 of target 20-30 pairs — tracked as an open P0 item, not hidden |
-| Scope creep (adding connectors before v1 is solid) | RICE table is the gate — Drive + local only until P0 items are fully done |
+| Permission model has an edge case that leaks access | Explicit test suite with mock-ACL scenarios and pre-LLM fail-closed filter |
+| Notion's limited webhook support blocks true freshness | Documented as an explicit trade-off (polling interval) in ADR 003 |
+| Scope creep | Modular connector architecture preserves clean boundaries |
 
 ## 14. Out of Scope / Future Considerations
 
-- Notion, Slack, Confluence connectors (designed via connector interface, not built in v1)
+- Notion, Slack, Confluence connectors (designed via connector interface)
 - True real-time (webhook-driven) sync
 - Multi-tenant SaaS, SSO, billing
 - Write-back/action execution (tickets, emails, CRM)
@@ -189,6 +187,4 @@ Three layers, each answering a different question. This is the section that prov
 ## 15. Supporting Artifacts
 
 - Architecture Decision Records: [001](decisions/001-permission-aware-retrieval.md), [002](decisions/002-drive-first-connector-scope.md), [003](decisions/003-near-real-time-vs-realtime-sync.md)
-- Backlog: [BACKLOG.md](BACKLOG.md) / [BACKLOG.csv](BACKLOG.csv) (Jira-importable)
-- Wireframes: Home, Chat, Sources, Feedback, Admin screens (see portfolio case study / demo GIF)
-- Evaluation report (generated): `docs/eval-report.md` after running `python -m evaluation.run_eval`
+- Evaluation report: `docs/eval-report.md` after running `python -m evaluation.run_eval`

@@ -1,6 +1,6 @@
 """
-Phase 2 (not built for v1). Stubbed against the same Connector interface to
-show the architecture supports additional sources without a redesign.
+Stubbed against the same Connector interface to demonstrate that the
+architecture supports additional enterprise sources without a redesign.
 
 Notion has no universal webhook across all workspace plans, so a real
 implementation would poll `search` on an interval rather than use a true
@@ -16,7 +16,7 @@ from connectors.base import Connector, DocMeta
 class NotionConnector(Connector):
     def __init__(self, api_token: str):
         self.api_token = api_token
-        raise NotImplementedError("Notion connector is designed, not built, for v1.")
+        raise NotImplementedError("Notion connector interface is stubbed and not currently enabled.")
 
     def list_documents(self) -> list:
         raise NotImplementedError

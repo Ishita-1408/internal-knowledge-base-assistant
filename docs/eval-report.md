@@ -9,7 +9,7 @@
 
 ## 1. Executive Summary
 
-This report documents the execution, metric audit, and security boundary verification of the 25-case golden evaluation benchmark for the NovaTech Internal Knowledge-Base Assistant (V1). 
+This report documents the execution, metric audit, and security boundary verification of the 25-case golden evaluation benchmark for the NovaTech Internal Knowledge-Base Assistant. 
 
 The evaluation tested:
 1. Retrieval Pipeline: Vector embeddings (gemini-embedding-001, 3072 dimensions) and ChromaDB candidate search across all 25 cases.
@@ -23,10 +23,10 @@ The evaluation tested:
 - Total Test Cases: 25 cases (defined in evaluation/golden_set.json and validated by scripts/validate_golden_set.py).
 - Category Breakdown:
   - Direct Fact Lookup: 8 cases (q01-q08)
-  - Multi-Document Synthesis: 6 cases (q09-q14)
-  - Permission Boundary Enforcement: 5 cases (q15-q19)
-  - Out-of-Scope / Refusal: 4 cases (q20-q23)
-  - Temporal Detail / Precision: 2 cases (q24-q25)
+  - Complex Synthesis: 4 cases (q09-q12)
+  - Negative Controls: 2 cases (q13-q14)
+  - Permission Gated: 5 cases (q15-q19)
+  - Ambiguous / Follow-ups: 6 cases (q20-q25)
 - Document Corpus (8 multi-format documents, 3,717 total words):
   1. Remote_Work_Policy.pdf (PDF, 583 words, Public)
   2. Leave_and_Attendance_Policy.docx (DOCX, 637 words, Public)
@@ -135,11 +135,11 @@ Security enforcement is strictly evaluated at query time before LLM context gene
 
 ## 9. Recommendations
 
-### P0 (Immediate / V1 Correctness):
+### Immediate Priorities:
 1. Evaluation Provider Tier: For full batch generation and judge scoring, use a tier or local endpoint (e.g. Ollama with llama3.1 or paid OpenAI/Gemini tier) with >= 50 requests headroom.
-2. Maintain Dense Retrieval Baseline: Preserve pure vector similarity ranking for V1 to protect high Precision@3 (84.2%).
+2. Maintain Dense Retrieval Baseline: Preserve pure vector similarity ranking to protect high Precision@3 (84.2%).
 
-### Phase 2 (Backlog / Future Improvements):
+### Future Enhancements:
 1. Hybrid Retrieval (BM25 + Dense Vectors): Supplement dense vector retrieval with lexical BM25 matching to cleanly reject completely out-of-domain terms like '401(k)' or 'pet policy'.
 2. Reranking: Introduce a lightweight cross-encoder reranker to improve multi-document synthesis precision.
 

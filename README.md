@@ -142,7 +142,7 @@ app/            Streamlit UI presentation layer (Knowledge Assistant + Admin Das
 connectors/     Google Drive, Local Folder, Base Connector interface
 dashboard/      Internal metrics & evaluation dashboard
 data/           Local ChromaDB vector store and SQLite database (git-ignored)
-docs/           PRD, architecture records (ADRs), evaluation reports, backlog
+docs/           PRD, architecture records (ADRs), evaluation reports
 evaluation/     25-case golden set, retrieval metrics, scorer rubric, batch eval runner
 generation/     Prompt construction, answer assembly, cost calculation, fallback logic
 ingestion/      File extractors (PDF, DOCX, TXT), text chunking, sync orchestration

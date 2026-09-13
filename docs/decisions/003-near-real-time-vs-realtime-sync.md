@@ -9,7 +9,7 @@ interval). True push-based real-time isn't uniformly available across all
 target sources (e.g., Notion's webhook support varies by plan).
 
 ## Decision
-v1 uses incremental sync on a fixed interval (e.g., every 10-15 minutes) via
+The system uses incremental sync on a fixed interval (e.g., every 10-15 minutes) via
 each source's changes/delta API (Google Drive's Changes API for the Drive
 connector). Each citation displays a "last synced" timestamp so users can
 judge freshness themselves rather than assuming instant accuracy.

@@ -1,5 +1,5 @@
 """
-Comprehensive End-to-End Product Validation Script for Internal Knowledge-Base Assistant V1.
+Comprehensive End-to-End Product Validation Script for Internal Knowledge-Base Assistant.
 """
 import json
 from pathlib import Path
