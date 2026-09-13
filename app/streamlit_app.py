@@ -404,7 +404,7 @@ with nav_col2:
         st.session_state.current_view = "admin"
         st.rerun()
 with nav_badge:
-    st.markdown('<div style="text-align: right; padding-top: 6px;"><span class="app-badge">Enterprise Ready</span></div>', unsafe_allow_html=True)
+    st.markdown('<div style="text-align: right; padding-top: 6px;"><span class="app-badge">System Active</span></div>', unsafe_allow_html=True)
 
 st.markdown("<hr style='border: none; border-top: 1px solid #E2E8F0; margin: 12px 0 24px 0;'/>", unsafe_allow_html=True)
 
