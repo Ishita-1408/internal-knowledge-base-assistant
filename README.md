@@ -67,7 +67,7 @@ Evaluation is structured across three distinct layers:
 
 | Layer | Metrics | Location |
 |---|---|---|
-| **Retrieval Quality** | Recall@K (97.4% in-scope), Precision@K, MRR (1.00 in-scope) | `evaluation/retrieval_metrics.py` |
+| **Retrieval Quality** | Recall@3 (97.4% in-scope), Precision@3 (84.2%), MRR (1.00 in-scope) | `evaluation/retrieval_metrics.py` |
 | **Answer Quality** | Groundedness, Answer Correctness, Citation Accuracy, Hallucination Rate | `evaluation/scorer.py` |
 | **Product & Security** | Permission Leak Rate (0.0%), Query Resolution, Latency, User Feedback | `evaluation/product_metrics.py`, `storage/db.py` |
 
