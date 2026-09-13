@@ -7,7 +7,7 @@ An enterprise knowledge-base assistant that answers natural-language questions w
 ## Architecture Overview
 
 ```
-[Google Drive]             [Local Folder]                 (Phase 2: [Notion / Slack])
+[Google Drive]             [Local Folder]                 [External Connectors]
        |                         |                                    |
        v                         v                                    v
  ------------------------- Connector Interface -----------------------------
@@ -41,7 +41,7 @@ An enterprise knowledge-base assistant that answers natural-language questions w
 ## Key Decisions & Architecture Records
 
 - [ADR 001: Permission-aware retrieval, not prompt-based restriction](docs/decisions/001-permission-aware-retrieval.md)
-- [ADR 002: Google Drive + local files only for V1](docs/decisions/002-drive-first-connector-scope.md)
+- [ADR 002: Google Drive + local files only](docs/decisions/002-drive-first-connector-scope.md)
 - [ADR 003: Near-real-time sync, not true real-time](docs/decisions/003-near-real-time-vs-realtime-sync.md)
 - [ADR 004: Calibrating retrieval confidence thresholds empirically](docs/decisions/004-distance-threshold-calibration.md)
 
@@ -49,12 +49,12 @@ Full product requirements and specifications: [docs/PRD.md](docs/PRD.md).
 
 ---
 
-## V1 Status & Connectors
+## System Status & Connectors
 
 | Component | Status | Details |
 |---|---|---|
 | **Local Ingestion Demo** | **Active & Verified** | Indexes local enterprise documents (`.pdf`, `.docx`, `.txt`) with ACL metadata in `.meta.json`. Includes complete 8-document NovaTech sample corpus (3,717 words). |
-| **Google Drive Connector** | **Implemented & Live-Validated** | Implemented and Live-Validated using a controlled Google Drive folder (`--drive-folder-id`); production/public OAuth deployment is outside V1. |
+| **Google Drive Connector** | **Implemented & Live-Validated** | Implemented and Live-Validated using a controlled Google Drive folder (`--drive-folder-id`); production/public OAuth deployment is outside current scope. |
 | **Vector Database** | **Active & Verified** | ChromaDB local persistent vector store (3072-dim embeddings). |
 | **Security & Permissions** | **Active & Verified** | 100% pre-LLM query-time ACL filtering; 0% permission leak rate across benchmark tests. |
 | **Automated Tests** | **59 / 59 Passing** | Unit test suite covering connectors (Drive OAuth, ACL parsing, folder filtering, incremental sync, Docs/Sheets/Slides export), extraction, permissions, retrieval metrics, scoring, and UI rate-limit handling. |
@@ -79,18 +79,6 @@ python -m evaluation.run_eval
 
 ---
 
-## Phase 2 Backlog (Explicitly Out of Scope for V1)
-
-The following features are tracked for subsequent milestones (see [docs/BACKLOG.md](docs/BACKLOG.md)):
-- Notion, Confluence, and Slack connectors
-- Hybrid lexical search (BM25 + Dense vector retrieval)
-- Cross-encoder reranking
-- Enterprise SSO & Okta SAML integration
-- Real-time webhook listeners
-- Write-back actions and document editing
-
----
-
 ## Setup Instructions
 
 ### 1. Installation
@@ -106,7 +94,6 @@ To sync from a live Google Drive account:
 1. Create a Desktop App OAuth client in [Google Cloud Console](https://console.cloud.google.com/) and enable the Google Drive API.
 2. Download the client secret JSON file as `credentials.json` into the project root (*Note: `credentials.json` and generated `token.json` are git-ignored and never committed*).
 3. Run the Drive sync command below.
-
 
 ---
 
@@ -163,5 +150,6 @@ retrieval/      Embedding generation, ChromaDB vector store, query-time permissi
 sample_docs/    8 synthetic enterprise documents & metadata for local evaluation/demo
 scripts/        Sync CLI, validation tools, and retrieval audit utilities
 storage/        SQLite database for feedback telemetry and sync state
-tests/          Complete 47-test automated test suite
+tests/          Complete 59-test automated test suite
 ```
+
